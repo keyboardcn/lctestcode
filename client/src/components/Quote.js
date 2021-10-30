@@ -3,7 +3,7 @@ function Quote({ quote, onChoose, keyId}) {
         <tr key={keyId} onClick={() => onChoose(quote.id)}>
         <td>{quote.id}</td>
         <td>{quote.name}</td>
-        <td>{quote.destination}</td>
+        <td>{quote.description}</td>
         <td>{`$${quote.price}`}</td>
       </tr>
     )

@@ -5,18 +5,8 @@ import DetailedQuote from './components/DetailedQuote';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [quotes, setQuotes] = useState([{
-    id: 1,
-    name: 'q1',
-    destination: 'vancouver',
-    price: 50000
-  },{
-    id: 2,
-    name: 'q2',
-    destination: 'toronto',
-    price: 60000
-  }])
-  const [activeId, setActiveId] = useState(1)
+  const [quotes, setQuotes] = useState([{ }])
+  const [activeId, setActiveId] = useState(0)
   
   useEffect(() => {
     const fetchQuotes = async () => {

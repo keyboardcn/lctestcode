@@ -5,7 +5,7 @@ const DetailedQuote = ({quote}) => {
         <ul>
         <li>{quote.id}</li>
         <li>{quote.name}</li>
-        <li>{quote.destination}</li>
+        <li>{quote.description}</li>
         <li>{`$${quote.price}`}</li>
         </ul>
     )
