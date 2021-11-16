@@ -1,13 +1,16 @@
 const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
 const bodyParser = require('body-parser');
 const cors = require("cors");
 
+const schema = require('./app/schema/schema');
+
 const app = express();
 
+// allow only access from "http://localhost:3000"
 var corsOptions = {
   origin: "http://localhost:3000"
 };
-
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
@@ -15,6 +18,11 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// graphql midware
+app.use('/graphql', graphqlHTTP({
+  schema,
+  graphiql: true
+}));
 
 const db = require("./app/models");
 
