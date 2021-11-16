@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, Sequelize) => {
     const Quote = sequelize.define("quote", {
       id: {
@@ -12,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
       },
       price: {
         type: Sequelize.INTEGER
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        field: 'user_id',
       }
     }, {
       timestamps: false,

@@ -24,7 +24,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-const db = require("./app/models");
+const { db } = require("./app/models");
 
 db.sequelize.sync();
 // db.sequelize.sync({force: true}).then(() => {

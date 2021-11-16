@@ -55,5 +55,18 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.quotes = require("./quote.model.js")(sequelize, Sequelize);
+db.users = require('./user.model')(sequelize, Sequelize);
 
-module.exports = db;
+const User = db.users;
+const Quote = db.quotes;
+
+Quote.belongsTo(User, {
+  foreignKey: 'user_id',
+  as: 'user'
+});
+User.hasMany(Quote, {
+  foreignKey: 'user_id',
+  as: 'quotes'
+})
+
+module.exports = { db, User, Quote };
