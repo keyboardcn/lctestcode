@@ -17,7 +17,7 @@ const QuoteType = new GraphQLObjectType({
         name: { type: GraphQLString},
         description: {type: GraphQLString},
         price: {type: GraphQLInt},
-        user: {
+        user: { // relationship
             type: UserType,
             resolve(parent, args) {
                return User.findOne({where: { id: parent.user_id }})
@@ -32,7 +32,7 @@ const UserType = new GraphQLObjectType({
         id: { type: GraphQLID},
         name: { type: GraphQLString},
         email: {type: GraphQLString},
-        quotes: {
+        quotes: { // relationship
             type: new GraphQLList(QuoteType),
             resolve(parent, args) {
                 return Quote.findAll({where: { userId: parent.id }})
@@ -65,6 +65,35 @@ const RootQueryType = new GraphQLObjectType({
     }
 })
 
+const MutationType = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addUser: {
+            type: UserType,
+            args: {
+                name: {type: GraphQLString},
+                email: {type: GraphQLString},
+            },
+            resolve(parent, args) {
+                return User.create({name: args.name, email: args.email});
+            }
+        },
+        updateQuote: {
+            type: QuoteType,
+            args: {
+                id: {type: GraphQLID},
+                userId: {type: GraphQLInt},
+            },
+            resolve(parent, args) {
+                const whereObj = {};
+                if (args.userId) whereObj.userId = args.userId;
+                Quote.update(whereObj, {where: {id: args.id}});
+            }
+        },
+    }
+});
+
 module.exports = new GraphQLSchema({
-    query: RootQueryType
+    query: RootQueryType,
+    mutation: MutationType,
 });

@@ -18,16 +18,8 @@ module.exports = (sequelize, Sequelize) => {
                 isEmail: true
             },
         },
-        createdAt: {
-            type: DataTypes.DATE,
-            field: 'created_at',
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            field: 'updated_at',
-        }
     }, {
-        timestamps: true,
+        timestamps: false,
         tableName: 'users'
     });
 
