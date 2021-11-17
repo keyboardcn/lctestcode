@@ -7,7 +7,8 @@ const {
     GraphQLID,
     GraphQLInt,
     GraphQLList,
-    GraphQLSchema
+    GraphQLSchema,
+    GraphQLNonNull,
 } = graphql;
 
 const QuoteType = new GraphQLObjectType({
@@ -71,7 +72,7 @@ const MutationType = new GraphQLObjectType({
         addUser: {
             type: UserType,
             args: {
-                name: {type: GraphQLString},
+                name: {type: new GraphQLNonNull(GraphQLString)},
                 email: {type: GraphQLString},
             },
             resolve(parent, args) {
