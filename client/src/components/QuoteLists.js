@@ -1,6 +1,16 @@
-import React from 'react'
 import Quote from './Quote'
-const QuoteLists = ({quotes, onChoose}) => {
+import { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+
+import { getQuotesQuery } from '../graphql/queries';
+
+function QuoteLists({ onChoose }){
+  const { loading, error, data } = useQuery(getQuotesQuery);
+      
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+  const quotes = data.quotes;
+ 
     return (
         <table>
             <tbody>
@@ -9,12 +19,14 @@ const QuoteLists = ({quotes, onChoose}) => {
                     <th>NAME</th>
                     <th>DESCRIPTION</th>
                     <th>PRICE</th>
+                    <th>User Name</th>
                 </tr>
-                {quotes.map((quote) => <Quote quote={quote} onChoose={onChoose} key={quote.id}/>)}
+                {quotes.map((quote, index) => <Quote quote={quote} index={index} onChoose={onChoose} />)}
 
             </tbody>
         </table>
     )
 }
 
-export default QuoteLists
+// bind getUsersQuery with QuoteLists component
+export default QuoteLists;

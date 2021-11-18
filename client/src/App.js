@@ -1,36 +1,46 @@
+/* eslint-disable no-unused-vars */
 import './App.css';
 
 import QuoteLists from './components/QuoteLists';
 import DetailedQuote from './components/DetailedQuote';
-import { useState, useEffect } from 'react';
+
+import { client } from './graphql/queries';
+import { 
+  ApolloProvider
+} from '@apollo/client';
+import { useState } from 'react';
+
 
 function App() {
-  const [quotes, setQuotes] = useState([{ }])
-  const [activeId, setActiveId] = useState(0)
+  // using hook to reserve data
   
-  useEffect(() => {
-    const fetchQuotes = async () => {
-      const res = await fetch('http://localhost:8080/api/quotes');
-      const data = await res.json()
-      console.log(data);
-      setQuotes(data);
-    }
-    fetchQuotes();
-  }, [])
-  
+  // rest API way of fetch
+  // useEffect(() => {
+  //   const fetchQuotes = async () => {
+  //     const res = await fetch('http://localhost:8080/api/quotes');
+  //     const data = await res.json()
+  //     setQuotes(data);
+  //   }
+  //   fetchQuotes();
+  // }, []);
 
-  const chooseActiveId = (id) => {
-    setActiveId(id);
+  const [quote, setQuote] = useState({});
+  const onChoose = (quote) => {
+    setQuote(quote);
   }
   return (
-    <div className="App">
-      <div className='frame'>
-        <QuoteLists quotes={quotes} onChoose={chooseActiveId}/>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <div className='frame'>
+          <QuoteLists onChoose = {onChoose} />
+        </div>
+        { 'id' in quote &&
+          <div className='frame'>
+            <DetailedQuote quote={quote}/>
+          </div>
+        }
       </div>
-      <div className='frame'>
-        {activeId >0 && <DetailedQuote quote={quotes.find(itm => itm.id === activeId)}/>}
-      </div>
-    </div>
+    </ApolloProvider>
   );
 }
 

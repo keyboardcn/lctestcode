@@ -18,6 +18,7 @@ const QuoteType = new GraphQLObjectType({
         name: { type: GraphQLString},
         description: {type: GraphQLString},
         price: {type: GraphQLInt},
+        userId: {type: GraphQLInt},
         user: { // relationship
             type: UserType,
             resolve(parent, args) {
@@ -54,6 +55,13 @@ const RootQueryType = new GraphQLObjectType({
                 return Quote.findOne({where: {id: args.id}});
             }
         },
+        quotes: {
+            type: new GraphQLList(QuoteType),
+            args: {},
+            resolve(parent, args) {
+                return Quote.findAll();
+            }
+        },
         user: {
             type: UserType,
             // only allow id as arg
@@ -62,7 +70,14 @@ const RootQueryType = new GraphQLObjectType({
                 console.log({success: `great! ${args.id}`});
                 return User.findOne({where: {id: args.id}});
             }        
-        }
+        },
+        users: {
+            type: new GraphQLList(UserType),
+            args: {},
+            resolve(parent, args) {
+                return User.findAll();
+            }
+        },
     }
 })
 
