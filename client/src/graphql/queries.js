@@ -42,8 +42,8 @@ export const getQuotesQuery = gql`
 
 // query variable: string not null
 export const addQuoteMutation = gql`
-mutation AddQuote($name: String!){
-    addQuote(name: $name){
+mutation AddQuote($name: String!, $description: String!, $price: Int, $userId: ID){
+    addQuote(name: $name, description: $description, price: $price, userId: $userId){
         id
         name
     }
