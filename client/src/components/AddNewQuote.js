@@ -2,9 +2,10 @@ import Quote from './Quote'
 import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
-import { getUsersQuery, addQuoteMutation } from '../graphql/queries';
+import { getUsersQuery, addQuoteMutation, getQuotesQuery } from '../graphql/queries';
 
 function AddNewQuote({}) {
+    
     const [bookState, setBookState] = useState({
         name: '',
         description: '',
@@ -18,11 +19,10 @@ function AddNewQuote({}) {
     if (error) return `Error! ${error.message}`;
     const users = data.users;
     
-
     function submitForm(e) {
         e.preventDefault();
-        addQuote({ variables: bookState});
-        // setBookState({});
+        addQuote({variables: bookState, refetchQueries: [{ query: getQuotesQuery}]});
+        setBookState({});
     }
 
     return(
