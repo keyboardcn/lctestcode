@@ -9,6 +9,7 @@ import {
   ApolloProvider
 } from '@apollo/client';
 import { useState } from 'react';
+import AddNewQuote from './components/AddNewQuote';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <DetailedQuote quote={quote}/>
           </div>
         }
+        <AddNewQuote></AddNewQuote>
       </div>
     </ApolloProvider>
   );

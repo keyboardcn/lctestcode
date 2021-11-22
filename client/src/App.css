@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin: 100px;
 }
 
 .App-logo {
@@ -40,4 +41,8 @@
 .frame {
   border: solid;
   margin-top: 100px;
+}
+
+input, select, button {
+  display: block;
 }

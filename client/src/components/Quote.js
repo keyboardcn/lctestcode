@@ -5,7 +5,7 @@ function Quote({ quote, onChoose, index}) {
         <td>{quote.name}</td>
         <td>{quote.description}</td>
         <td>{`$${quote.price}`}</td>
-        <td>{quote.user.name}</td>
+        <td>{quote.user? quote.user.name : ''}</td>
       </tr>
     )
 }

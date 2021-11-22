@@ -94,6 +94,18 @@ const MutationType = new GraphQLObjectType({
                 return User.create({name: args.name, email: args.email});
             }
         },
+        addQuote: {
+            type: QuoteType,
+            args: {
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                description: {type: GraphQLString},
+                price: {type: GraphQLInt},
+                userId: {type: GraphQLID},
+            },
+            resolve(parent, args) {
+                return Quote.create({name: args.name, description: args.description, price: args.price, userId: args.userId});
+            }
+        },
         updateQuote: {
             type: QuoteType,
             args: {

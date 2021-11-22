@@ -39,3 +39,13 @@ export const getQuotesQuery = gql`
     }
 }
 `;
+
+// query variable: string not null
+export const addQuoteMutation = gql`
+mutation AddQuote($name: String!){
+    addQuote(name: $name){
+        id
+        name
+    }
+}
+`
