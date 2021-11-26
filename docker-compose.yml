@@ -1,0 +1,75 @@
+version: "3.4"
+
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  mysql_db:
+    container_name: mysql_db
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./mysql
+    volumes:
+      - ./mysql/data:/var/lib/mysql/data"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=liming
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_DATABASE=lctestdb
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_HOST=localhost      
+
+  nginx:
+    depends_on:
+      - server
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+    # networks:
+    #   - app-tier
+
+  server:
+    container_name: server
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    depends_on:
+      - mysql_db
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - MYSQL_USER=liming
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_DATABASE=lctestdb
+      - MYSQL_HOST_IP=mysql_db
+    # networks:
+    #   - app-tier
+    expose:
+      - "3002"
+    # expose as 4002, to be connected by client through nginx
+    ports:
+      - "4002:3001"
+
+  client:
+    container_name: client
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    # expose as 4001, which server will give permisson to
+    ports:
+      - "4001:3000"

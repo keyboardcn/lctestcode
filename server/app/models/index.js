@@ -5,11 +5,13 @@ const path = require('path');
 const Umzug = require('umzug');
 
 // connect to db
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.HOST,
+const sequelize = new Sequelize({
+  database: dbConfig.DB,
+  username: dbConfig.USER,
+  password: dbConfig.PASSWORD,
   dialect: dbConfig.dialect,
+  host: dbConfig.HOST,
   operatorsAliases: false,
-
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,

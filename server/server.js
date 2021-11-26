@@ -9,7 +9,7 @@ const app = express();
 
 // allow only access from "http://localhost:3000"
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "http://localhost:4001"
 };
 app.use(cors(corsOptions));
 
@@ -34,14 +34,14 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to application." });
+  res.json({ message: "Welcome to server." });
 });
 
 
 require("./app/routes/quote.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
