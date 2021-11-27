@@ -24,15 +24,16 @@ services:
       - MYSQL_HOST=localhost      
 
   nginx:
+    image: nginx:1.19.1
     depends_on:
       - server
       - client
     restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
+    volumes:
+      - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf
+      - ./nginx/default.conf:/etc/nginx/site-confs/default
     ports:
-      - "3050:80"
+      - 80:81
     # networks:
     #   - app-tier
 

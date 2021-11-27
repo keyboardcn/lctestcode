@@ -18,6 +18,8 @@ To run, go to client folder
 ### `npm run start`
 Make sure you port 3000 is available for the frontend to run
 
-
+!!!!!
 !!! caution: the definition of networks unnecessary as there will be a default network created for all
 the setting now, are not through nginx because i am connect directly to 4001
+
+!!!nginx-dev.conf will replace nginx.conf, it will define what config fill to be used: site-confs

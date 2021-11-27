@@ -9,7 +9,7 @@ const app = express();
 
 // allow only access from "http://localhost:3000"
 var corsOptions = {
-  origin: "http://localhost:4001"
+  origin: "http://0.0.0.0:4001"
 };
 app.use(cors(corsOptions));
 
