@@ -23,3 +23,5 @@ Make sure you port 3000 is available for the frontend to run
 the setting now, are not through nginx because i am connect directly to 4001
 
 !!!nginx-dev.conf will replace nginx.conf, it will define what config fill to be used: site-confs
+
+client serve to nginx

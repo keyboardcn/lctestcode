@@ -7,9 +7,11 @@ const schema = require('./app/schema/schema');
 
 const app = express();
 
-// allow only access from "http://localhost:3000"
+// allow only access from "http://localhost:3000" client
+// sometimes http://localhost not work
 var corsOptions = {
-  origin: "http://0.0.0.0:4001"
+  origin: "http://0.0.0.0",
+  optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 

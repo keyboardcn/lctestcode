@@ -6,7 +6,7 @@ import {
 
 // apollo client setup, connect
 export const client = new ApolloClient({
-    uri: 'http://localhost:4002/graphql',
+    uri: 'http://localhost/graphql',
     cache: new InMemoryCache(),
 });
   
