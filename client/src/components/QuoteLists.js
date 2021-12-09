@@ -2,6 +2,9 @@ import Quote from './Quote'
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
+import '../scss/custom.css'
+
+
 import { getQuotesQuery } from '../graphql/queries';
 
 function QuoteLists({ onChoose }){
@@ -12,18 +15,20 @@ function QuoteLists({ onChoose }){
   const quotes = data.quotes;
  
     return (
-        <table>
-            <tbody>
+        <table className="table">
+            <thead>
                 <tr>
-                    <th>ID#</th>
-                    <th>NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>PRICE</th>
-                    <th>User Name</th>
+                    <th scope="col">ID#</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">DESCRIPTION</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">User Name</th>
                 </tr>
+            </thead>
+            <tbody>
                 {quotes.map((quote, index) => <Quote quote={quote} index={index} onChoose={onChoose} />)}
-
             </tbody>
+
         </table>
     )
 }

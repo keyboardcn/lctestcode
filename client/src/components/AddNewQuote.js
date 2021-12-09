@@ -27,10 +27,10 @@ function AddNewQuote({}) {
 
     return(
         <form onSubmit={ e => submitForm(e)}>
-            <input type="text" name="name" onChange = {(e) => {setBookState({ ...bookState, name: e.target.value }) }}/>
-            <input type="text" name= "description" onChange = {(e) => {setBookState({ ...bookState, description: e.target.value }) }} />
-            <input type="number" name="price" onChange = {(e) => {setBookState({ ...bookState, price: parseInt(e.target.value, 10) }) }} />
-            <select name="userId" onChange = {(e) => {setBookState({ ...bookState, userId: e.target.value }) }}>
+            <input type="text" className="form-control" name="name" onChange = {(e) => {setBookState({ ...bookState, name: e.target.value }) }}/>
+            <input type="text" className="form-control" name= "description" onChange = {(e) => {setBookState({ ...bookState, description: e.target.value }) }} />
+            <input type="number" className="form-control" name="price" onChange = {(e) => {setBookState({ ...bookState, price: parseInt(e.target.value, 10) }) }} />
+            <select name="userId" className="form-control" onChange = {(e) => {setBookState({ ...bookState, userId: e.target.value }) }}>
                 {users.map(itm => <option value={itm.id}>{itm.name}</option>)}
             </select>
             <button>+</button>

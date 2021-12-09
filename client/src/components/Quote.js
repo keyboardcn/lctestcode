@@ -1,7 +1,9 @@
+import '../scss/custom.css'
+
 function Quote({ quote, onChoose, index}) {
     return (
         <tr key={index} onClick={() => onChoose(quote)}>
-        <td>{quote.id}</td>
+        <th scope="row">{quote.id}</th>
         <td>{quote.name}</td>
         <td>{quote.description}</td>
         <td>{`$${quote.price}`}</td>

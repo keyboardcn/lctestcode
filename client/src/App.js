@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import './App.css';
+import '../src/scss/custom.css'
 
 import QuoteLists from './components/QuoteLists';
 import DetailedQuote from './components/DetailedQuote';
@@ -31,15 +32,17 @@ function App() {
   }
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <div className='frame'>
-          <QuoteLists onChoose = {onChoose} />
-        </div>
-        { 'id' in quote &&
-          <div className='frame'>
-            <DetailedQuote quote={quote}/>
+      <div className="container">
+        <div className="grid">
+          <div>
+            <QuoteLists onChoose = {onChoose} />
           </div>
-        }
+          { 'id' in quote &&
+            <div className='g-col-4'>
+              <DetailedQuote quote={quote}/>
+            </div>
+          }
+        </div>
         <AddNewQuote></AddNewQuote>
       </div>
     </ApolloProvider>
